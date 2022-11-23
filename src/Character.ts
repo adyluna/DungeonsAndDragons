@@ -5,6 +5,7 @@ import Race, { Elf } from './Races';
 import getRandomInt from './utils';
 
 export default class Character implements Fighter {
+  private _name: string;
   private _race: Race;
   private _archetype: Archetype;
   private _maxLifePoints: number;
@@ -16,6 +17,7 @@ export default class Character implements Fighter {
 
   constructor(name: string) {
     const random = getRandomInt(1, 10);
+    this._name = name;
     this._dexterity = random;
     this._race = new Elf(name, this._dexterity);
     this._archetype = new Mage(name);
@@ -24,6 +26,10 @@ export default class Character implements Fighter {
     this._strength = random;
     this._defense = random;
     this._energy = { type_: this._archetype.energyType, amount: random };
+  }
+
+  get name(): string {
+    return this._name;
   }
 
   get race(): Race {
